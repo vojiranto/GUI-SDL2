@@ -45,37 +45,39 @@ type SurfaceCollection = CacheCollection SDL.Surface
 type NaturalStringCollection = HM.HashMap ByteString T.Text
 
 -- | Дополнительные параметры шрифта используемые в 'GuiFontDef'
-data GuiFontOptions = GuiFontOptions {
-      fontKerning :: Maybe FNT.Kerning -- ^ Настроить кернинг шрифта или оставить по умолчанию.
+data GuiFontOptions = GuiFontOptions 
+    { fontKerning :: Maybe FNT.Kerning -- ^ Настроить кернинг шрифта или оставить по умолчанию.
     , fontHinting :: Maybe FNT.Hinting -- ^ Настроить хинтинг шрифта или оставить по умолчанию.
     , fontOutline :: Maybe FNT.Outline -- ^ Настроить Outline шрифта или оставить по умолчанию.
     , fontStyle   :: Maybe [FNT.Style] -- ^ Настроить стили шрифта или оставить по умолчанию.
-                                     }
-                                 deriving ( Eq, Show )
+    } deriving ( Eq, Show )
 
 instance Default GuiFontOptions where
-    def = GuiFontOptions { fontKerning = Nothing
-                         , fontHinting = Nothing
-                         , fontOutline = Nothing
-                         , fontStyle   = Nothing
-                         }
+    def = GuiFontOptions
+        { fontKerning = Nothing
+        , fontHinting = Nothing
+        , fontOutline = Nothing
+        , fontStyle   = Nothing
+        }
 
 -- | Элемент списка предзагруженных шрифтов, передаваемый функции @GUI.BaseLayer.RunGUI.runGUI@.
-data GuiFontDef = GuiFontDef{
-      fontAbbrev    :: T.Text -- ^ Сокращённое название, ключ шрифта, по которому он будет доступен в коллекции.
-    , fontPath      :: String  -- ^ Имя файла шрифта. Если путь не указан или он относительный, то шрифт
-                               -- должен находиться в директории ресурсов.
-    , fontPtSz      :: Int -- ^ Размер шрифта в пунктах.
+data GuiFontDef = GuiFontDef
+    { fontAbbrev    :: T.Text         -- ^ Сокращённое название, ключ шрифта,
+                                      -- по которому он будет доступен в
+                                      -- коллекции.
+    , fontPath      :: String         -- ^ Имя файла шрифта. Если путь не указан или он относительный, то шрифт
+                                      -- должен находиться в директории ресурсов.
+    , fontPtSz      :: Int            -- ^ Размер шрифта в пунктах.
     , fontOpts      :: GuiFontOptions -- ^ Дополнительные параметры шрифта.
     }
 
 -- | Элемент коллеции кешируемых шрифтов
-data FontCollectionItem = FontCollectionItem {
-      fntPath      :: String -- ^ Имя файла шрифта из 'GuiFontDef'.
+data FontCollectionItem = FontCollectionItem
+    { fntPath      :: String -- ^ Имя файла шрифта из 'GuiFontDef'.
     , fntPtSz      :: Int -- ^ Размер шрифта в пунктах из 'GuiFontDef'.
     , fntOpts      :: GuiFontOptions -- ^ Дополнительные параметры шрифта из 'GuiFontDef'.
     , fnt          :: FNT.Font -- ^ Загруженный и настроенный шрифт.
-                                             }
+    }
 
 -- | Тип коллеции кешируемых шрифтов.
 type FontCollection = CacheCollection FontCollectionItem
@@ -94,5 +96,5 @@ data ResourceManager = ResourceManager {
     , fonts     :: IORef FontCollection -- ^ Коллекция загруженных шрифтов.
     -- | Cтроки естественного языка из файлов /I18n/ru_RU/*.txt.
     , natStrs :: NaturalStringCollection
-                                       }
+    }
 

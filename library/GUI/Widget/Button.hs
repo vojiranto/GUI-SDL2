@@ -47,6 +47,7 @@ import qualified Data.Text as T
 import Data.Bits
 import Data.IORef
 import Data.Maybe
+import Control.Monad.State
 import qualified SDL
 import SDL.Vect
 import Control.Monad.Extra (whenJust)
@@ -73,26 +74,31 @@ data TextureButtonDef = TextureButtonDef {
                                       -- отображаемая когда виджет в состоянии disabled
                                       -- (его флаг @WidgetEnable@ сброшен, см. @enableWidget@).
   , buttonInitPictRow :: Int -- ^  начальное отображение ряда в текстуре.
-                                            }
+  }
+
+class FormItemWidgetClass a where
+    formItemWidget :: StateMonad a m -> FormItemWidgetDef -> m ()
 
 instance Default TextureButtonDef where
-    def = TextureButtonDef  { buttonFormItemDef = def
-                            , buttonSize = zero
-                            , buttonFlags = WidgetVisible .|. WidgetEnable
-                            , buttonTexture = undefined
-                            , buttonTextureOwned = False
-                            , buttonMouseInPictIx = Nothing
-                            , buttonPressedPictIx = Nothing
-                            , buttonDisabledPictIx = Nothing
-                            , buttonInitPictRow = 0
-                            }
+    def = TextureButtonDef
+        { buttonFormItemDef     = def
+        , buttonSize            = zero
+        , buttonFlags           = WidgetVisible .|. WidgetEnable
+        , buttonTexture         = undefined
+        , buttonTextureOwned    = False
+        , buttonMouseInPictIx   = Nothing
+        , buttonPressedPictIx   = Nothing
+        , buttonDisabledPictIx  = Nothing
+        , buttonInitPictRow     = 0
+        }
 
 -- | ОБщий тип для нескольких кнопок. Создаётся при создании кнопки,
 -- экспортируется только левая часть.
-data TextureButtonData = TextureButtonData { txtrbttnOnClick :: IORef NoArgAction
-                                           , txtrbttnPictRow :: IORef Int
-                                           , txtrbttnMouseState :: IORef WidgetMouseState
-                                           }
+data TextureButtonData = TextureButtonData
+    { txtrbttnOnClick :: IORef NoArgAction
+    , txtrbttnPictRow :: IORef Int
+    , txtrbttnMouseState :: IORef WidgetMouseState
+    }
 
 -- | Экземпляры этого класса - виджеты, которые могут выполнить действие в ответ на клик.
 instance Clickable (GuiWidget TextureButtonData) where
@@ -117,10 +123,10 @@ textureButton :: MonadIO m =>
                  m (GuiWidget TextureButtonData)
 textureButton TextureButtonDef{..} parent skin = do
     MouseAnimatedClickableHndlr
-            { mouseAnimatedClickableMouseState = mouseState
-            , mouseAnimatedClickableAction = onCLick'
-            , mouseAnimatedClickableFs = fns
-            } <- noChildrenClickableHndlr buttonSize (\_ _ _ -> return ())
+        { mouseAnimatedClickableMouseState = mouseState
+        , mouseAnimatedClickableAction = onCLick'
+        , mouseAnimatedClickableFs = fns
+        } <- noChildrenClickableHndlr buttonSize (\_ _ _ -> return ())
     rowRf <- newMonadIORef buttonInitPictRow
     mkWidget buttonFlags
             (fromMaybe (formItemsMargin skin) $ formItemMargin buttonFormItemDef)
