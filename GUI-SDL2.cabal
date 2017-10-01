@@ -63,8 +63,8 @@ library
     , text-show
     , filepath
     , directory
-    , mtl
     , monadplus
+    , mtl
     , sdl2
     , sdl2-ttf
     , sdl2-image
