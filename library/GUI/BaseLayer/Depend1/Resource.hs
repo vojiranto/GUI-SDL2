@@ -10,12 +10,18 @@
 -- Типы относящиеся к менеджеру ресурсов, "GUI.BaseLayer.Resource" и вынесенные в отдельный файл
 -- для исключения циклической зависимости модулей.
 
-module GUI.BaseLayer.Depend1.Resource(
-    -- * Типы относящиеся к менеджеру ресурсов, "GUI.BaseLayer.Resource" и вынесенные в отдельный файл
-    -- для исключения циклической зависимости модулей.
-    CachedItem,CacheCollection,GuiFontOptions(..),GuiFontDef(..),FontCollectionItem(..),FontCollection
-    ,NaturalStringCollection,CursorCollection,ResourceManager(..)
-                        ) where
+module GUI.BaseLayer.Depend1.Resource
+    ( CachedItem
+    , CacheCollection
+    , GuiFontOptions(..)
+    , GuiFontDef(..)
+    , FontCollectionItem(..)
+    , FontCollection
+    , NaturalStringCollection
+    , CursorCollection
+    , ResourceManager(..)
+    ) where
+
 import qualified Data.HashMap.Strict as HM
 import           Data.ByteString.Char8   (ByteString)
 import qualified Data.Text as T
