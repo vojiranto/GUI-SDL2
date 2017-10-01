@@ -140,9 +140,6 @@ library:
         other-modules:
         - System.X11.Utils
   extra-libraries:
-  - SDL2
-  - SDL2_ttf
-  - SDL2_image
   dependencies:
   - base
   - template-haskell
@@ -164,6 +161,7 @@ library:
   - filepath
   - directory
   - monadplus
+  - mtl
   - sdl2
   - sdl2-ttf
   - sdl2-image

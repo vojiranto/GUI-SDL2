@@ -77,7 +77,7 @@ data TextureButtonDef = TextureButtonDef {
   }
 
 class FormItemWidgetClass a where
-    formItemWidget :: StateMonad a m -> FormItemWidgetDef -> m ()
+    formItemWidget :: MonadState a m => FormItemWidgetDef -> m ()
 
 instance Default TextureButtonDef where
     def = TextureButtonDef

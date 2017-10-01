@@ -39,10 +39,6 @@ library
   hs-source-dirs:
       library
   ghc-options: -Wall -Wname-shadowing -fwarn-tabs -Werror
-  extra-libraries:
-      SDL2
-      SDL2_ttf
-      SDL2_image
   build-depends:
       base
     , template-haskell
@@ -169,7 +165,6 @@ executable GUIDemo
       , text
       , transformers
       , vector
-      , mtl
       , sdl2
       , sdl2-ttf
       , sdl2-image
