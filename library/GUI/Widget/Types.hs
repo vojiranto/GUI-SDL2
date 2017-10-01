@@ -26,7 +26,7 @@ module GUI.Widget.Types(
     ,IndexedValueProperty(..),RowNumProperty(..),ColNumProperty(..)
     ,MouseStateProperty(..),OnEnd(..),Verifiable(..),Moveable(..),MarkersPropertyType,MarkersProperty(..)
     ,GetStateForSave(..)
-                        ) where
+    ) where
 
 import Control.Monad.IO.Class
 import qualified Data.Text as T

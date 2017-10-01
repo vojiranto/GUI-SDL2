@@ -31,8 +31,10 @@
 -- Левая верхняя точка CanvasRect, обычно в начале задаётся нулевой и в дальнейшем означает смещение
 -- реальной области рисования оносительно виртуальной.
 
-module GUI.Widget.Container.ScrollArea(
-    ScrollAreaDef(..),ScrollAreaData,scrollArea
+module GUI.Widget.Container.ScrollArea
+    ( ScrollAreaDef(..)
+    , ScrollAreaData
+    , scrollArea
     ) where
 
 import Control.Monad

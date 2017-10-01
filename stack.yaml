@@ -15,7 +15,7 @@
 # resolver:
 #  name: custom-snapshot
 #  location: "./custom-snapshot.yaml"
-resolver: lts-9.5
+resolver: nightly-2017-09-29
 #resolver: lts-8.24
 
 # User packages to be built.
@@ -40,15 +40,6 @@ packages:
 #- '../sdl2'
 #- '../sdl2-ttf'
 #- '../sdl2-image'
-- location:
-    git: https://github.com/haskell-game/sdl2
-    commit: e57ede8119b879e0308bf59006cde5b97adb77c3
-- location:
-    git: https://github.com/haskell-game/sdl2-ttf
-    commit: 1cf10a568948c9df56f31029dc30f3e9087b4334
-- location:
-    git: https://github.com/tauli/sdl2-image
-    commit: 8a42872666afc64e4a548041eb093dce4ad56455
 - '.'
 # Dependency packages to be pulled from upstream that are not in the resolver
 # (e.g., acme-missiles-0.3)

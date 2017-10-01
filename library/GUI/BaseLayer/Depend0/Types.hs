@@ -108,7 +108,3 @@ type GuiWindowId = Word32
 -- | Тип самого окна в SDL.
 type GuiWindowIx = SDL.Window
 
-
-
-
-
